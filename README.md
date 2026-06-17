@@ -85,7 +85,7 @@ http://localhost:3000
 ## 📬 Contact
 
 * Email: deepesh3950lodhi@gmail.com
-* LinkedIn: https://www.linkedin.com/in/deepesh-verma-838993393/
+* LinkedIn: https://www.linkedin.com/in/deepesh-verma-838993393
 * GitHub: https://github.com/DeepeshV08
 
 ## ⭐ Support
