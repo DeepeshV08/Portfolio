@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+:root{
+    --font-sans: var(--font-intern)
+    --font-mono: var(--font-jetbrains-mono)
+}
+
+h1, span, h3{
+    font-family: var(--font-mono);
+}
+h2,p, h4{
+    font-family: var(--font-sans);
+}

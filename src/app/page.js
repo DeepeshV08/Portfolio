@@ -17,7 +17,7 @@ const page = () => {
   }
   
   return (
-   <main className='h-screen w-full flex items-center text-white'>
+   <main className='h-screen w-full flex items-start pt-[5rem] text-white'>
     <InfiniteCarousel projects={projects}></InfiniteCarousel>
    </main>
   )
