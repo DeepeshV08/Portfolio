@@ -1,8 +1,7 @@
-'use client'
-import { forwardRef, useImperativeHandle, useRef } from "react";
-import gsap from '@/libs/gsap'
-import { ScrollTrigger, useGSAP, SplitText} from "@/libs/gsap";
+"use client";
 
+import gsap, { ScrollTrigger, SplitText, useGSAP } from "../libs/gsap";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 
 const TextReveal = forwardRef(
   (
@@ -17,78 +16,77 @@ const TextReveal = forwardRef(
       delay = 0,
       ease = "power3.out",
     },
-    ref
+    ref,
   ) => {
     const wrapperRef = useRef(null);
-    const splitRef = useRef(null)
-    const tlRef = useRef(null)
+    const splitRef = useRef(null);
+    const tlRef = useRef(null);
 
     useImperativeHandle(ref, () => ({
-    play: () => tlRef.current?.play(),
-    reverse: () => tlRef.current?.reverse(),
-    reset: () => tlRef.current?.pause(0),
+      play: () => tlRef.current?.play(),
+      reverse: () => tlRef.current?.reverse(),
+      reset: () => tlRef.current?.pause(0),
     }));
-    
-    useGSAP(() => {
+
+    useGSAP(
+      () => {
         splitRef.current = new SplitText(wrapperRef.current, {
-            type: splitBy,
-            lineThreshold: 0.3
-        })
+          type: splitBy,
+          lineThreshold: 0.3,
+        });
 
-        const elements = splitRef.current[splitBy]
+        const elements = splitRef.current[splitBy];
 
-        gsap.set(elements,{
-            yPercent: 110,
-        })
+        gsap.set(elements, {
+          yPercent: 110,
+        });
+
         tlRef.current = gsap.timeline({
-            paused: true,
-            defaults: {delay}
-        })
-        tlRef.current.to(elements,{
-            yPercent: 0,
-            opacity: 1,
-            duration,
-            ease,
-            stagger:{
-                each: stagger,
-                from: 'start'
-            }
-        })
+          paused: true,
+          defaults: { delay },
+        });
 
-        if(trigger === 'mount'){
-            tlRef.current.play()
+        tlRef.current.to(elements, {
+          yPercent: 0,
+          opacity: 1,
+          duration,
+          ease,
+          stagger: {
+            each: stagger,
+            from: "start",
+          },
+        });
+
+        if (trigger === "mount") {
+          tlRef.current.play();
         }
 
-        if(trigger === 'scroll'){
-            ScrollTrigger.create({
-                trigger: wrapperRef.current,
-                start: scrollStart,
-                once: true,
-                onEnter: () => {
-                    tlRef.current?.play()
-                }
-            })
+        if (trigger === "scroll") {
+          ScrollTrigger.create({
+            trigger: wrapperRef.current,
+            start: scrollStart,
+            once: true,
+            onEnter: () => tlRef.current?.play(),
+          });
         }
 
         return () => {
-            tlRef.current?.kill(),
-            splitRef.current?.revert()
-        }
-    },{
-        scope:  wrapperRef,
-        dependencies: [splitBy, trigger, stagger, duration]
-    })
+          tlRef.current?.kill();
+          splitRef.current?.revert();
+        };
+      },
+      {
+        scope: wrapperRef,
+        dependencies: [splitBy, trigger, stagger, duration],
+      },
+    );
+
     return (
-      <div
-        ref={wrapperRef}
-        className={`overflow-hidden ${className}`}
-      >
+      <div ref={wrapperRef} className={`overflow-hidden ${className}`}>
         {children}
       </div>
     );
-  }
+  },
 );
-
-TextReveal.displayName = "TextReveal";
 
 export default TextReveal;

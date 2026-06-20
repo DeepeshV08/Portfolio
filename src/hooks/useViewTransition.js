@@ -22,7 +22,7 @@ const createStrips = () => {
         
         flex: 1;
         height: 100%;
-        background-color: black;
+        background-color: #010101;
         transform: scaleY(0);
         transform-origin: bottom;
         `;
@@ -36,6 +36,7 @@ const createStrips = () => {
 };
 
 const removeOverlay = () => {
+  if (typeof document === "undefined") return;
   const el = document.getElementById("page-transition-overlay");
   if (el) el.remove();
 };
@@ -55,9 +56,9 @@ const useViewTransition = () => {
         scaleY: 1,
         duration: 0.58,
         ease: "power3.inOut",
-        stagger:{
-            each: 0.06,
-            from:'edges'
+        stagger: {
+          each: 0.06,
+          from: "edges",
         },
         onComplete: () => {
           router.push(href);
@@ -67,10 +68,10 @@ const useViewTransition = () => {
             duration: 0.7,
             ease: "power3.inOut",
             delay: 0.12,
-            stagger:{
-            each: 0.06,
-            from:'edges'
-        },
+            stagger: {
+              each: 0.06,
+              from: "edges",
+            },
             transformOrigin: "top",
             onComplete: removeOverlay,
           });

@@ -3,7 +3,7 @@ import TextReveal from "./TextReveal";
 import { useRef } from "react";
 import useViewTransition from "@/hooks/useViewTransition";
 
-const CARD_W = 330;
+const CARD_W = 320;
 const CARD_H = 380;
 const SCALE = 1.35;
 

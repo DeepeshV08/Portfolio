@@ -1,26 +1,17 @@
-'use client'
-import InfiniteCarousel from '@/components/InfiniteCarousel'
-import TextReveal from '@/components/TextReveal'
-import { projects } from '@/data/projects'
-import { useRef } from 'react'
+"use client";
+
+import InfiniteCarousel from "@/components/InfiniteCarousel";
+import TextReveal from "@/components/TextReveal";
+import { projects } from "@/data/projects";
+import { useRef } from "react";
 
 
-const page = () => {
-
-  const triggerRef = useRef(null)
-
-  const handleHoverEnter = () => {
-    triggerRef.current?.play()
-  }
-  const handleHoverLeave = () => {
-    triggerRef.current?.reverse()
-  }
+export default function Home() {
   
-  return (
-   <main className='h-screen w-full flex items-start pt-[5rem] text-white'>
-    <InfiniteCarousel projects={projects}></InfiniteCarousel>
-   </main>
-  )
-}
 
-export default page
+  return (
+    <main className="h-screen flex items-start w-full">
+      <InfiniteCarousel projects={projects} />
+    </main>
+  );
+}
